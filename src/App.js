@@ -1,14 +1,14 @@
 import './App.css';
 import { BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 
-import Cricbuzz from './component/Cricbuzz';
+import GetMatches from './component/GetMatches';
 
 function App() {
   return (
     <div className="App">
       <Router>
         <Switch>
-          <Route exact path="/" component={Cricbuzz} />
+          <Route exact path="/" component={GetMatches} />
         </Switch>
       </Router>
     </div>
