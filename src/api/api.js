@@ -1,4 +1,5 @@
 const API_KEY = "gWhoJRAh0NMu1mOdgVVafYhaEYF3";
+const NEWS_API_KEY = "dd1b525e290741b8b413c2fb66346d5b";
 
 
 export const getMatchInfo = () => {
@@ -31,4 +32,12 @@ export const getMatchScore = (id) => {
     return fetch(url)
       .then((res) => res.json())
       .catch((err) => console.log(err));
+  };
+
+  export const getNews = () => {
+    const url = `https://newsapi.org/v2/top-headlines?country=in&category=sports&apiKey=${NEWS_API_KEY}`;
+  
+    return fetch(url)
+      .then((res) => res.json())
+      .catch((error) => console.log(error));
   };

@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import { getMatchInfo } from '../api/api';
 import Cricbuzz from './Cricbuzz';
 import ListCard from './ListCard';
+import loader from '../img/loader.gif'
 import SearchIcon from "@material-ui/icons/Search";
 
 
@@ -23,11 +24,14 @@ function GetMatches() {
 
     useEffect(() => {
         getMatchInfo()
-        .then((data) => {setMatches(data.matches)
-            //console.log(data);
+        .then((data) => {
+            setMatches(data.matches)
+            setLoading(false);
+            console.log(data);
         })
         .catch((err) => {console.log(err)})
     }, []);
+    const [loading, setLoading] = useState(true)
     //console.log(matches);
     return(
         <>
@@ -43,15 +47,34 @@ function GetMatches() {
                 </div>
             </div>
             {
-            matchType.length !== 0
-                ? matchType.map((match) => (
-                    <ListCard key={match.unique_id} matchData={match} />
-                ))
-                : matches.map((match) => (
-                    <ListCard key={match.unique_id} matchData={match} />
-                ))
-            //alert('No matches found')
+                !loading ? (<div>
+                    {
+                        matchType.length !== 0
+                            ? matchType.map((match) => (
+                                <ListCard key={match.unique_id} matchData={match} />
+                            ))
+                            : matches.map((match) => (
+                                <ListCard key={match.unique_id} matchData={match} />
+                            ))
+                        //alert('No matches found')
+                        }
+                    </div>
+                ) : (<>
+                    <img 
+                    style = {{
+                        position: "absolute",
+                        width : 260,
+                        height : 300,
+                        top: "50%",
+                        left: "50%",
+                        transform: "translate(-50%, -50%)"
+                    }}
+                        src = {loader}
+                        alt = "Loading"
+                    />
+                </>)
             }
+            
         </>
     )
 }

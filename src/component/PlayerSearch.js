@@ -15,7 +15,7 @@ import {
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    width: '100%',
+    width: '80%',
   },
   heading: {
     fontSize: "1.1rem",
